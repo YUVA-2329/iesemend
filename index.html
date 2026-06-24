@@ -3,1350 +3,169 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Synergy AI — Validate Your Business Idea Before You Build It</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>SYNERGY AI - Redirecting</title>
+
 <style>
-  :root {
-    --ink:       #0a0b14;
-    --surface:   #0e1020;
-    --panel:     #141628;
-    --border:    rgba(99,102,241,0.18);
-    --blue:      #6366f1;
-    --violet:    #8b5cf6;
-    --cyan:      #22d3ee;
-    --rose:      #f43f5e;
-    --text:      #e2e4f0;
-    --muted:     #8890b0;
-    --glow-blue: rgba(99,102,241,0.25);
-    --glow-violet: rgba(139,92,246,0.2);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Inter,Arial,sans-serif;
+}
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--ink);
-    color: var(--text);
-    overflow-x: hidden;
-    line-height: 1.6;
-  }
+body{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#ffffff,#f3f6ff);
+    overflow:hidden;
+}
 
-  /* ── TYPOGRAPHY ── */
-  h1,h2,h3,h4 { font-family: 'Space Grotesk', sans-serif; line-height: 1.15; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
+.bg{
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at 20% 20%,rgba(0,123,255,.15),transparent 35%),
+    radial-gradient(circle at 80% 80%,rgba(138,43,226,.15),transparent 35%);
+}
 
-  /* ── UTILITIES ── */
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-  .grad-text {
-    background: linear-gradient(135deg, #818cf8 0%, #a78bfa 40%, #22d3ee 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .tag {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px; font-weight: 500;
-    letter-spacing: .12em; text-transform: uppercase;
-    color: var(--cyan);
-    background: rgba(34,211,238,.08);
-    border: 1px solid rgba(34,211,238,.25);
-    border-radius: 4px; padding: 4px 12px; margin-bottom: 18px;
-  }
-  .section-title { font-size: clamp(28px,4vw,44px); font-weight: 700; margin-bottom: 14px; }
-  .section-sub { font-size: 17px; color: var(--muted); max-width: 580px; margin: 0 auto 56px; }
+.card{
+    position:relative;
+    z-index:10;
+    width:min(700px,90%);
+    padding:50px;
+    text-align:center;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+}
 
-  /* ── GRID NOISE BACKGROUND ── */
-  body::before {
-    content:'';
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background-image:
-      linear-gradient(rgba(99,102,241,.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(99,102,241,.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
+.logo{
+    font-size:64px;
+    font-weight:900;
+    letter-spacing:4px;
+    background:linear-gradient(90deg,#0066ff,#7b2cff);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    padding: 0 24px;
-    background: rgba(10,11,20,.72);
-    backdrop-filter: blur(18px) saturate(1.4);
-    border-bottom: 1px solid var(--border);
-    height: 64px; display: flex; align-items: center;
-  }
-  .nav-inner { max-width: 1200px; margin: 0 auto; width: 100%;
-    display: flex; align-items: center; justify-content: space-between; }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-icon {
-    width: 36px; height: 36px; border-radius: 9px;
-    background: linear-gradient(135deg, var(--blue), var(--violet));
-    display: flex; align-items: center; justify-content: center; font-size: 18px;
-    box-shadow: 0 0 16px var(--glow-blue);
-  }
-  .logo-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px;
-    color: #fff; letter-spacing: -.01em; }
-  .logo-name span { color: var(--blue); }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500;
-    transition: color .2s; }
-  .nav-links a:hover { color: #fff; }
-  .nav-cta { display: flex; gap: 10px; align-items: center; }
-  .btn { display: inline-flex; align-items: center; gap: 8px;
-    padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 600;
-    cursor: pointer; transition: all .2s; text-decoration: none; border: none; }
-  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
-  .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--blue), var(--violet));
-    color: #fff; box-shadow: 0 0 20px var(--glow-blue);
-  }
-  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 0 32px var(--glow-blue); }
-  .btn-lg { padding: 14px 32px; font-size: 15px; border-radius: 10px; }
-  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer;
-    background: none; border: none; padding: 4px; }
-  .hamburger span { width: 22px; height: 2px; background: var(--text); border-radius: 2px;
-    transition: all .3s; display: block; }
+.subtitle{
+    margin-top:12px;
+    color:#555;
+    font-size:18px;
+}
 
-  /* ── HERO ── */
-  #hero {
-    min-height: 100vh; display: flex; align-items: center;
-    padding: 120px 24px 80px; position: relative; overflow: hidden;
-  }
-  .hero-orb {
-    position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
-  }
-  .orb-1 { width: 600px; height: 600px; top: -200px; right: -100px;
-    background: radial-gradient(circle, rgba(99,102,241,.3) 0%, transparent 70%); }
-  .orb-2 { width: 400px; height: 400px; bottom: -100px; left: -100px;
-    background: radial-gradient(circle, rgba(139,92,246,.2) 0%, transparent 70%); }
-  .orb-3 { width: 300px; height: 300px; top: 30%; left: 40%;
-    background: radial-gradient(circle, rgba(34,211,238,.1) 0%, transparent 70%); }
+.message{
+    margin-top:30px;
+    color:#222;
+    font-size:20px;
+}
 
-  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(99,102,241,.1); border: 1px solid rgba(99,102,241,.3);
-    border-radius: 100px; padding: 6px 16px; margin-bottom: 24px;
-    font-size: 12px; font-weight: 500; color: #a5b4fc;
-  }
-  .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22d3ee;
-    animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{ opacity:1; transform: scale(1); } 50%{ opacity:.5; transform:scale(1.4); } }
-  .hero-h1 { font-size: clamp(36px,5vw,60px); font-weight: 800; letter-spacing: -.03em;
-    margin-bottom: 20px; line-height: 1.08; }
-  .hero-sub { font-size: 18px; color: var(--muted); margin-bottom: 40px; max-width: 480px; line-height: 1.7; }
-  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 56px; }
-  .hero-stats { display: flex; gap: 36px; }
-  .hstat { }
-  .hstat-num { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; color: #fff; }
-  .hstat-num span { color: var(--cyan); }
-  .hstat-label { font-size: 13px; color: var(--muted); margin-top: 2px; }
+.countdown{
+    margin-top:25px;
+    font-size:42px;
+    font-weight:800;
+    color:#0066ff;
+}
 
-  /* ── HERO VISUAL ── */
-  .hero-visual { position: relative; }
-  .dashboard-card {
-    background: rgba(20,22,40,.8);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 24px;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 32px 64px rgba(0,0,0,.5), 0 0 0 1px rgba(99,102,241,.1) inset;
-    position: relative; overflow: hidden;
-  }
-  .dashboard-card::before {
-    content: ''; position: absolute; inset: 0; border-radius: 18px;
-    background: linear-gradient(135deg, rgba(99,102,241,.06), rgba(139,92,246,.03));
-    pointer-events: none;
-  }
-  .dc-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-  .dc-dots { display: flex; gap: 6px; }
-  .dc-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dc-title { font-size: 13px; font-weight: 600; color: var(--muted); font-family:'JetBrains Mono',monospace; }
-  .dc-badge { font-size: 10px; padding: 3px 8px; border-radius: 4px; font-family:'JetBrains Mono',monospace;
-    background: rgba(34,211,238,.1); color: var(--cyan); border: 1px solid rgba(34,211,238,.2); }
+.status{
+    margin-top:15px;
+    color:#777;
+}
 
-  .score-ring-wrap { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
-  .score-ring { position: relative; width: 88px; height: 88px; flex-shrink: 0; }
-  .score-ring svg { transform: rotate(-90deg); }
-  .score-ring-val { position: absolute; inset: 0; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; }
-  .score-ring-num { font-family:'Space Grotesk',sans-serif; font-size: 22px; font-weight: 700; color: #fff; }
-  .score-ring-sub { font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
-  .score-info { flex: 1; }
-  .score-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; font-family:'JetBrains Mono',monospace; }
-  .score-name { font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 8px; }
-  .score-bar-wrap { height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden; }
-  .score-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--blue), var(--cyan)); }
+.button{
+    display:inline-block;
+    margin-top:30px;
+    padding:14px 28px;
+    border-radius:12px;
+    background:#0066ff;
+    color:white;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s;
+}
 
-  .metric-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; margin-bottom: 16px; }
-  .metric-item { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-    border-radius: 10px; padding: 12px; }
-  .metric-icon { font-size: 18px; margin-bottom: 4px; }
-  .metric-val { font-family:'Space Grotesk',sans-serif; font-size: 15px; font-weight: 700; color:#fff; }
-  .metric-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.button:hover{
+    transform:translateY(-2px);
+}
 
-  .chart-bars { display: flex; gap: 6px; align-items: flex-end; height: 60px; padding: 0 4px; }
-  .bar { flex: 1; border-radius: 3px 3px 0 0; transition: opacity .2s; min-height: 8px; }
-  .bar:hover { opacity: .8; }
+.loader{
+    width:60px;
+    height:60px;
+    margin:25px auto;
+    border:4px solid rgba(0,0,0,.08);
+    border-top:4px solid #0066ff;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
 
-  .floating-tag {
-    position: absolute; background: rgba(20,22,40,.9); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px 14px; backdrop-filter: blur(12px);
-    display: flex; align-items: center; gap: 8px; white-space: nowrap; font-size: 12px; font-weight: 500;
-    animation: float 3s ease-in-out infinite;
-  }
-  .floating-tag:nth-child(2) { animation-delay: -1s; }
-  .ft1 { top: -18px; right: -20px; }
-  .ft2 { bottom: 40px; left: -24px; animation-delay: -1.5s; }
-  @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-  .ft-icon { width: 28px; height: 28px; border-radius: 7px;
-    display: flex; align-items: center; justify-content: center; font-size: 14px; }
-
-  /* ── PROBLEM ── */
-  #problem { padding: 100px 24px; position: relative; }
-  .problem-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
-  .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
-  .stat-card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    padding: 36px 28px; position: relative; overflow: hidden;
-  }
-  .stat-card::before { content:''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, var(--blue), var(--violet)); }
-  .stat-big { font-family:'Space Grotesk',sans-serif; font-size: 52px; font-weight: 800;
-    background: linear-gradient(135deg, #fff, #a5b4fc); -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent; background-clip:text; line-height: 1; margin-bottom: 10px; }
-  .stat-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-  /* ── SOLUTION ── */
-  #solution { padding: 100px 24px; }
-  .solution-inner { max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
-  .solution-visual {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
-    padding: 32px; position: relative;
-  }
-  .ai-pipeline { display: flex; flex-direction: column; gap: 12px; }
-  .pipe-step {
-    display: flex; align-items: center; gap: 14px;
-    background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-    border-radius: 12px; padding: 14px 16px;
-    transition: all .3s;
-  }
-  .pipe-step:hover { border-color: var(--blue); background: rgba(99,102,241,.06); }
-  .pipe-icon { width: 36px; height: 36px; border-radius: 9px; display: flex;
-    align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .pipe-text { flex: 1; }
-  .pipe-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-  .pipe-sub { font-size: 11px; color: var(--muted); font-family:'JetBrains Mono',monospace; }
-  .pipe-status { font-size: 10px; font-family:'JetBrains Mono',monospace; }
-  .pipe-connector { width: 2px; height: 12px; background: linear-gradient(180deg,var(--blue),var(--violet));
-    margin-left: 34px; border-radius: 2px; }
-
-  .solution-text h2 { margin-bottom: 20px; }
-  .solution-text p { color: var(--muted); margin-bottom: 20px; font-size: 16px; line-height: 1.75; }
-  .check-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .check-list li { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--text); }
-  .check-list li::before { content:'✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
-
-  /* ── FEATURES ── */
-  #features { padding: 100px 24px; text-align: center; }
-  .features-inner { max-width: 1200px; margin: 0 auto; }
-  .feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
-  .feature-card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    padding: 28px 24px; text-align: left; position: relative; overflow: hidden;
-    transition: all .3s; cursor: default;
-  }
-  .feature-card:hover { transform: translateY(-4px); border-color: rgba(99,102,241,.4);
-    box-shadow: 0 20px 40px rgba(99,102,241,.12); }
-  .feature-card::after { content:''; position: absolute; inset: 0; border-radius: 16px;
-    background: linear-gradient(135deg, rgba(99,102,241,.04), transparent);
-    opacity: 0; transition: opacity .3s; pointer-events: none; }
-  .feature-card:hover::after { opacity: 1; }
-  .fc-icon-wrap { width: 48px; height: 48px; border-radius: 12px; margin-bottom: 18px;
-    display: flex; align-items: center; justify-content: center; font-size: 24px; }
-  .fc-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; font-family:'Space Grotesk',sans-serif; }
-  .fc-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
-
-  /* ── HOW IT WORKS ── */
-  #how { padding: 100px 24px; }
-  .how-inner { max-width: 900px; margin: 0 auto; text-align: center; }
-  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; position: relative; }
-  .steps::before { content:''; position: absolute; top: 44px; left: calc(16.66% + 20px);
-    right: calc(16.66% + 20px); height: 1px;
-    background: linear-gradient(90deg, var(--blue), var(--violet), var(--cyan)); }
-  .step { text-align: center; padding: 0 20px; }
-  .step-num {
-    width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 24px;
-    display: flex; align-items: center; justify-content: center;
-    font-family:'Space Grotesk',sans-serif; font-size: 28px; font-weight: 800;
-    background: var(--panel); border: 2px solid var(--blue);
-    position: relative; z-index: 1;
-    box-shadow: 0 0 30px var(--glow-blue);
-  }
-  .step-num::before { content:''; position:absolute; inset:-1px; border-radius:50%;
-    background: linear-gradient(135deg, var(--blue), var(--violet));
-    z-index:-1; opacity:.2; }
-  .step-icon { font-size: 32px; }
-  .step-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; font-family:'Space Grotesk',sans-serif; }
-  .step-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
-
-  /* ── BENEFITS ── */
-  #benefits { padding: 100px 24px; }
-  .benefits-inner { max-width: 1200px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  .benefit-list { display: flex; flex-direction: column; gap: 20px; }
-  .benefit-item { display: flex; gap: 18px; align-items: flex-start; }
-  .ben-icon { width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center; font-size: 20px; }
-  .ben-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 4px; font-family:'Space Grotesk',sans-serif; }
-  .ben-desc { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-  .benefit-visual { position: relative; }
-  .bv-card { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 28px; }
-  .bv-title { font-size: 14px; font-weight: 600; color: var(--muted); margin-bottom: 20px;
-    font-family:'JetBrains Mono',monospace; text-transform: uppercase; letter-spacing: .08em; }
-  .progress-list { display: flex; flex-direction: column; gap: 16px; }
-  .prog-item { }
-  .prog-label { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; }
-  .prog-name { color: var(--text); font-weight: 500; }
-  .prog-val { color: var(--cyan); font-family:'JetBrains Mono',monospace; font-size: 12px; }
-  .prog-bar { height: 6px; background: rgba(255,255,255,.06); border-radius: 3px; overflow: hidden; }
-  .prog-fill { height: 100%; border-radius: 3px; transition: width 1.5s ease; }
-
-  /* ── DEMO DASHBOARD ── */
-  #demo { padding: 100px 24px; text-align: center; }
-  .demo-inner { max-width: 1200px; margin: 0 auto; }
-  .demo-window {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
-    overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(99,102,241,.08) inset;
-  }
-  .dw-bar { background: rgba(255,255,255,.03); border-bottom: 1px solid var(--border);
-    padding: 14px 20px; display: flex; align-items: center; gap: 16px; }
-  .dw-dots { display: flex; gap: 6px; }
-  .dw-url { flex: 1; background: rgba(255,255,255,.05); border-radius: 6px;
-    padding: 6px 14px; font-size: 12px; color: var(--muted); font-family:'JetBrains Mono',monospace;
-    text-align: center; }
-  .dw-body { padding: 28px; display: grid; grid-template-columns: 200px 1fr; gap: 20px; }
-  .dw-sidebar { background: rgba(255,255,255,.02); border-radius: 12px; padding: 16px; }
-  .dw-logo { font-family:'Space Grotesk',sans-serif; font-size: 14px; font-weight: 700;
-    color: #fff; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
-  .dw-nav { display: flex; flex-direction: column; gap: 4px; }
-  .dw-nav-item { font-size: 12px; color: var(--muted); padding: 8px 10px; border-radius: 7px;
-    display: flex; gap: 8px; align-items: center; cursor: default; transition: all .2s; }
-  .dw-nav-item.active { background: rgba(99,102,241,.15); color: #a5b4fc; }
-  .dw-nav-item:hover:not(.active) { background: rgba(255,255,255,.04); }
-
-  .dw-main { }
-  .dw-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
-  .dw-h-title { font-family:'Space Grotesk',sans-serif; font-size: 18px; font-weight: 700; }
-  .dw-kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 16px; }
-  .dw-kpi { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
-    border-radius: 10px; padding: 14px; }
-  .dw-kpi-val { font-family:'Space Grotesk',sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 3px; }
-  .dw-kpi-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
-  .dw-kpi-chg { font-size: 11px; margin-top: 4px; font-family:'JetBrains Mono',monospace; }
-  .up { color: #34d399; } .dn { color: var(--rose); }
-  .dw-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .dw-chart-card { background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.05);
-    border-radius: 10px; padding: 14px; }
-  .dw-chart-title { font-size: 11px; color: var(--muted); margin-bottom: 12px;
-    text-transform: uppercase; letter-spacing: .07em; font-family:'JetBrains Mono',monospace; }
-  .mini-bars { display: flex; gap: 4px; align-items: flex-end; height: 50px; }
-  .mini-bar { flex: 1; border-radius: 2px 2px 0 0; }
-  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; height: 90px; }
-  .swot-cell { border-radius: 6px; padding: 8px; font-size: 10px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .06em; }
-
-  /* ── TESTIMONIALS ── */
-  #testimonials { padding: 100px 24px; text-align: center; }
-  .testi-inner { max-width: 1200px; margin: 0 auto; }
-  .testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-  .testi-card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
-    padding: 28px; text-align: left; transition: all .3s; position: relative;
-  }
-  .testi-card:hover { transform: translateY(-3px); border-color: rgba(139,92,246,.3); }
-  .testi-quote { font-size: 32px; color: var(--violet); margin-bottom: 12px; line-height: 1; }
-  .testi-text { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
-  .testi-author { display: flex; align-items: center; gap: 12px; }
-  .testi-avatar { width: 42px; height: 42px; border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0;
-    border: 2px solid var(--border); }
-  .testi-name { font-size: 13px; font-weight: 700; color: #fff; font-family:'Space Grotesk',sans-serif; }
-  .testi-role { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .stars { color: #fbbf24; font-size: 12px; margin-bottom: 12px; }
-
-  /* ── PRICING ── */
-  #pricing { padding: 100px 24px; text-align: center; }
-  .pricing-inner { max-width: 1100px; margin: 0 auto; }
-  .price-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
-  .price-card {
-    background: var(--panel); border: 1px solid var(--border); border-radius: 20px;
-    padding: 36px 28px; text-align: left; position: relative; overflow: hidden;
-    transition: all .3s;
-  }
-  .price-card.featured {
-    border-color: var(--blue); background: rgba(99,102,241,.06);
-    box-shadow: 0 0 40px var(--glow-blue);
-    transform: scale(1.03);
-  }
-  .featured-tag { position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-    background: linear-gradient(90deg, var(--blue), var(--violet));
-    font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    color: #fff; padding: 5px 20px; border-radius: 0 0 10px 10px; }
-  .price-tier { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .1em;
-    margin-bottom: 10px; font-family:'JetBrains Mono',monospace; }
-  .price-amount { font-family:'Space Grotesk',sans-serif; font-size: 44px; font-weight: 800;
-    color: #fff; line-height: 1; margin-bottom: 4px; }
-  .price-amount sup { font-size: 20px; vertical-align: super; color: var(--muted); }
-  .price-period { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
-  .price-desc { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
-  .price-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
-  .price-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
-  .price-features li { font-size: 13px; color: var(--text); display: flex; gap: 10px; align-items: center; }
-  .price-features li span { color: var(--cyan); font-size: 14px; }
-  .price-features li.off { color: var(--muted); }
-  .price-features li.off span { color: rgba(255,255,255,.2); }
-  .price-btn { width: 100%; text-align: center; justify-content: center; }
-
-  /* ── CONTACT ── */
-  #contact { padding: 100px 24px; }
-  .contact-inner { max-width: 1100px; margin: 0 auto;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-  .contact-info h2 { margin-bottom: 16px; }
-  .contact-info p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 36px; }
-  .contact-items { display: flex; flex-direction: column; gap: 18px; margin-bottom: 36px; }
-  .ci { display: flex; gap: 14px; align-items: center; }
-  .ci-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(99,102,241,.1);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 17px; }
-  .ci-label { font-size: 11px; color: var(--muted); margin-bottom: 2px; text-transform: uppercase; letter-spacing: .07em; }
-  .ci-val { font-size: 14px; color: var(--text); font-weight: 500; }
-  .social-links { display: flex; gap: 12px; }
-  .sl { width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,.04);
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    text-decoration: none; font-size: 17px; transition: all .2s; }
-  .sl:hover { border-color: var(--blue); background: rgba(99,102,241,.1); transform: translateY(-2px); }
-
-  .contact-form { background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 36px; }
-  .cf-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; font-family:'Space Grotesk',sans-serif; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-  .form-group { margin-bottom: 14px; }
-  .form-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; display: block;
-    text-transform: uppercase; letter-spacing: .07em; font-weight: 500; }
-  .form-input {
-    width: 100%; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
-    border-radius: 9px; padding: 12px 16px; color: var(--text); font-size: 14px;
-    font-family: 'Inter', sans-serif; outline: none; transition: border-color .2s;
-  }
-  .form-input:focus { border-color: var(--blue); }
-  .form-input::placeholder { color: rgba(136,144,176,.5); }
-  textarea.form-input { resize: vertical; min-height: 100px; }
-
-  /* ── CTA BANNER ── */
-  #cta-banner { padding: 80px 24px; text-align: center; }
-  .cta-box {
-    max-width: 800px; margin: 0 auto;
-    background: linear-gradient(135deg, rgba(99,102,241,.2), rgba(139,92,246,.15));
-    border: 1px solid rgba(99,102,241,.3); border-radius: 24px; padding: 60px 40px;
-    position: relative; overflow: hidden;
-  }
-  .cta-box::before { content:''; position:absolute; inset:0;
-    background: radial-gradient(circle at 50% -20%, rgba(99,102,241,.3), transparent 70%); }
-  .cta-box h2 { font-size: clamp(26px,3.5vw,40px); font-weight: 800; margin-bottom: 14px; position: relative; }
-  .cta-box p { font-size: 17px; color: var(--muted); margin-bottom: 32px; position: relative; }
-  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
-
-  /* ── FOOTER ── */
-  footer { padding: 60px 24px 32px; border-top: 1px solid var(--border); }
-  .footer-inner { max-width: 1200px; margin: 0 auto; }
-  .footer-top { display: grid; grid-template-columns: 1.5fr repeat(3,1fr); gap: 48px; margin-bottom: 48px; }
-  .footer-brand p { font-size: 14px; color: var(--muted); margin: 12px 0 20px; line-height: 1.6; max-width: 260px; }
-  .footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px;
-    text-transform: uppercase; letter-spacing: .08em; }
-  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-  .footer-col ul li a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
-  .footer-col ul li a:hover { color: var(--blue); }
-  .footer-bottom { display: flex; justify-content: space-between; align-items: center;
-    padding-top: 28px; border-top: 1px solid var(--border); }
-  .footer-bottom p { font-size: 13px; color: var(--muted); }
-  .footer-links { display: flex; gap: 20px; }
-  .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
-  .footer-links a:hover { color: var(--text); }
-
-  /* ── SCROLL REVEAL ── */
-  .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
-  .reveal.visible { opacity: 1; transform: none; }
-
-  /* ── COUNTER ── */
-  .counter { }
-
-  /* ── ANIMATIONS ── */
-  @keyframes gradient-shift {
-    0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%}
-  }
-  .animated-gradient {
-    background: linear-gradient(270deg, #818cf8, #a78bfa, #22d3ee, #818cf8);
-    background-size: 300% 300%;
-    animation: gradient-shift 6s ease infinite;
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 768px) {
-    .nav-links, .nav-cta { display: none; }
-    .hamburger { display: flex; }
-    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-    .hero-visual { display: none; }
-    .hero-stats { gap: 24px; }
-    .stat-row { grid-template-columns: 1fr; }
-    .solution-inner { grid-template-columns: 1fr; }
-    .feature-grid { grid-template-columns: 1fr 1fr; }
-    .steps::before { display: none; }
-    .steps { grid-template-columns: 1fr; gap: 36px; }
-    .benefits-inner { grid-template-columns: 1fr; }
-    .benefit-visual { display: none; }
-    .testi-grid { grid-template-columns: 1fr; }
-    .price-grid { grid-template-columns: 1fr; }
-    .price-card.featured { transform: none; }
-    .contact-inner { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-    .dw-body { grid-template-columns: 1fr; }
-    .dw-sidebar { display: none; }
-    .dw-kpi-row { grid-template-columns: repeat(2,1fr); }
-    .dw-charts { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 500px) {
-    .feature-grid { grid-template-columns: 1fr; }
-    .footer-top { grid-template-columns: 1fr; }
-  }
+@keyframes spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
 </style>
 </head>
+
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="logo">
-      <div class="logo-icon">⚡</div>
-      <span class="logo-name">Synergy <span>AI</span></span>
+<div class="bg"></div>
+
+<div class="card">
+    <div class="logo">SYNERGY AI</div>
+
+    <div class="subtitle">
+        AI-Powered Startup Intelligence Platform
+    </div>
+
+    <div class="loader"></div>
+
+    <div class="message">
+        You are being redirected to the latest version of Synergy AI
+    </div>
+
+    <div class="countdown" id="countdown">5</div>
+
+    <div class="status">
+        Connecting to latest deployment...
+    </div>
+
+    <a class="button" href="PASTE_NEW_LINK_HERE">
+        Launch Latest Version
     </a>
-    <ul class="nav-links">
-      <li><a href="#problem">Why Us</a></li>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#how">How It Works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-cta">
-      <a href="#pricing" class="btn btn-ghost">Sign In</a>
-      <a href="#contact" class="btn btn-primary">Get Early Access</a>
-    </div>
-    <button class="hamburger" onclick="this.closest('nav').querySelector('.nav-links').style.display='flex'; this.closest('nav').querySelector('.nav-links').style.flexDirection='column'; this.closest('nav').querySelector('.nav-links').style.position='fixed'; this.closest('nav').querySelector('.nav-links').style.top='64px'; this.closest('nav').querySelector('.nav-links').style.left='0'; this.closest('nav').querySelector('.nav-links').style.right='0'; this.closest('nav').querySelector('.nav-links').style.background='rgba(10,11,20,.97)'; this.closest('nav').querySelector('.nav-links').style.padding='24px'; this.closest('nav').querySelector('.nav-links').style.borderBottom='1px solid rgba(99,102,241,.18)'; this.closest('nav').querySelector('.nav-links').style.zIndex='99';">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-orb orb-1"></div>
-  <div class="hero-orb orb-2"></div>
-  <div class="hero-orb orb-3"></div>
-  <div class="hero-inner">
-    <div class="hero-content">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        Now in Early Access — Join 2,400+ founders
-      </div>
-      <h1 class="hero-h1">Validate Your<br><span class="animated-gradient">Business Idea</span><br>Before You Build It</h1>
-      <p class="hero-sub">AI-powered business intelligence for entrepreneurs and innovators. Get market predictions, competitor analysis, and a full feasibility report in minutes — not months.</p>
-      <div class="hero-btns">
-        <a href="#contact" class="btn btn-primary btn-lg">⚡ Analyze My Idea</a>
-        <a href="#demo" class="btn btn-ghost btn-lg">▷ &nbsp;Book Demo</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hstat"><div class="hstat-num"><span class="counter" data-target="94">0</span>%</div><div class="hstat-label">Prediction Accuracy</div></div>
-        <div class="hstat"><div class="hstat-num"><span class="counter" data-target="12000">0</span>+</div><div class="hstat-label">Ideas Analyzed</div></div>
-        <div class="hstat"><div class="hstat-num"><span class="counter" data-target="3">0</span>x</div><div class="hstat-label">Faster Than Research</div></div>
-      </div>
-    </div>
-
-    <!-- HERO CARD VISUAL -->
-    <div class="hero-visual">
-      <div class="dashboard-card" style="position:relative;">
-        <div class="floating-tag ft1" style="color:#34d399;">
-          <div class="ft-icon" style="background:rgba(52,211,153,.15);">✓</div>
-          Feasibility Score: 87/100
-        </div>
-        <div class="floating-tag ft2" style="color:#a78bfa;">
-          <div class="ft-icon" style="background:rgba(167,139,250,.15);">🧠</div>
-          AI Analysis Complete
-        </div>
-        <div class="dc-topbar">
-          <div class="dc-dots">
-            <div class="dc-dot" style="background:#ef4444;"></div>
-            <div class="dc-dot" style="background:#f59e0b;"></div>
-            <div class="dc-dot" style="background:#22c55e;"></div>
-          </div>
-          <div class="dc-title">synergy_analysis.json</div>
-          <div class="dc-badge">LIVE</div>
-        </div>
-        <div class="score-ring-wrap">
-          <div class="score-ring">
-            <svg width="88" height="88" viewBox="0 0 88 88">
-              <circle cx="44" cy="44" r="36" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="7"/>
-              <circle cx="44" cy="44" r="36" fill="none" stroke="url(#rg)" stroke-width="7" stroke-linecap="round"
-                stroke-dasharray="226" stroke-dashoffset="40"/>
-              <defs>
-                <linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#6366f1"/>
-                  <stop offset="100%" stop-color="#22d3ee"/>
-                </linearGradient>
-              </defs>
-            </svg>
-            <div class="score-ring-val">
-              <div class="score-ring-num">87</div>
-              <div class="score-ring-sub">score</div>
-            </div>
-          </div>
-          <div class="score-info">
-            <div class="score-label">// BUSINESS IDEA</div>
-            <div class="score-name">AI Productivity SaaS</div>
-            <div style="font-size:12px;color:#34d399;margin-bottom:8px;font-family:'JetBrains Mono',monospace;">● High Viability</div>
-            <div class="score-bar-wrap"><div class="score-bar" style="width:87%;"></div></div>
-          </div>
-        </div>
-        <div class="metric-grid">
-          <div class="metric-item">
-            <div class="metric-icon">📈</div>
-            <div class="metric-val" style="color:#34d399;">$4.2B</div>
-            <div class="metric-lbl">Market Size</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-icon">🏆</div>
-            <div class="metric-val">24</div>
-            <div class="metric-lbl">Competitors</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-icon">⚠️</div>
-            <div class="metric-val" style="color:#fbbf24;">Med</div>
-            <div class="metric-lbl">Risk Level</div>
-          </div>
-          <div class="metric-item">
-            <div class="metric-icon">💰</div>
-            <div class="metric-val" style="color:#a78bfa;">$820K</div>
-            <div class="metric-lbl">Y1 Revenue Est.</div>
-          </div>
-        </div>
-        <div style="font-size:10px;color:var(--muted);margin-bottom:8px;font-family:'JetBrains Mono',monospace;">// MARKET DEMAND TREND</div>
-        <div class="chart-bars">
-          <div class="bar" style="height:40%;background:rgba(99,102,241,.4);"></div>
-          <div class="bar" style="height:52%;background:rgba(99,102,241,.5);"></div>
-          <div class="bar" style="height:48%;background:rgba(99,102,241,.5);"></div>
-          <div class="bar" style="height:65%;background:rgba(99,102,241,.6);"></div>
-          <div class="bar" style="height:60%;background:rgba(99,102,241,.6);"></div>
-          <div class="bar" style="height:72%;background:rgba(139,92,246,.65);"></div>
-          <div class="bar" style="height:78%;background:rgba(139,92,246,.7);"></div>
-          <div class="bar" style="height:85%;background:linear-gradient(180deg,#6366f1,#8b5cf6);"></div>
-          <div class="bar" style="height:90%;background:linear-gradient(180deg,#6366f1,#22d3ee);box-shadow:0 0 10px rgba(34,211,238,.4);"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PROBLEM -->
-<section id="problem">
-  <div class="problem-inner">
-    <div class="tag reveal">The Problem</div>
-    <h2 class="section-title reveal">Most Startups Fail<br><span class="grad-text">Before They Even Launch</span></h2>
-    <p class="section-sub reveal">Founders spend months — and fortunes — building products nobody wants. The root cause is almost always the same: skipping validation.</p>
-    <div class="stat-row">
-      <div class="stat-card reveal">
-        <div class="stat-big">90%</div>
-        <div class="stat-desc">of startups fail. The #1 reason: building something the market doesn't want or need.</div>
-      </div>
-      <div class="stat-card reveal" style="--d:.1s">
-        <div class="stat-big">$1.8M</div>
-        <div class="stat-desc">average capital burned by early-stage startups before they realize their core assumption was wrong.</div>
-      </div>
-      <div class="stat-card reveal" style="--d:.2s">
-        <div class="stat-big">42%</div>
-        <div class="stat-desc">of failed startups cite lack of market need as the direct cause — a problem that's fully preventable.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SOLUTION -->
-<section id="solution">
-  <div class="solution-inner container">
-    <div class="solution-visual reveal">
-      <div style="font-size:12px;color:var(--muted);margin-bottom:18px;font-family:'JetBrains Mono',monospace;">// synergy_ai_engine.process(idea)</div>
-      <div class="ai-pipeline">
-        <div class="pipe-step">
-          <div class="pipe-icon" style="background:rgba(99,102,241,.15);">🧠</div>
-          <div class="pipe-text">
-            <div class="pipe-name">NLP Idea Parsing</div>
-            <div class="pipe-sub">Extracting entities, intent & domain</div>
-          </div>
-          <div class="pipe-status" style="color:#34d399;">✓ Done</div>
-        </div>
-        <div class="pipe-connector"></div>
-        <div class="pipe-step">
-          <div class="pipe-icon" style="background:rgba(34,211,238,.12);">🌐</div>
-          <div class="pipe-text">
-            <div class="pipe-name">Market Intelligence Scan</div>
-            <div class="pipe-sub">Crawling 50M+ data points</div>
-          </div>
-          <div class="pipe-status" style="color:#34d399;">✓ Done</div>
-        </div>
-        <div class="pipe-connector"></div>
-        <div class="pipe-step">
-          <div class="pipe-icon" style="background:rgba(139,92,246,.15);">🔍</div>
-          <div class="pipe-text">
-            <div class="pipe-name">Competitor Deep Scan</div>
-            <div class="pipe-sub">Analyzing positioning & moats</div>
-          </div>
-          <div class="pipe-status" style="color:#34d399;">✓ Done</div>
-        </div>
-        <div class="pipe-connector"></div>
-        <div class="pipe-step">
-          <div class="pipe-icon" style="background:rgba(251,191,36,.1);">⚖️</div>
-          <div class="pipe-text">
-            <div class="pipe-name">Risk Modeling</div>
-            <div class="pipe-sub">Monte Carlo simulation — 10,000 runs</div>
-          </div>
-          <div class="pipe-status" style="color:#34d399;">✓ Done</div>
-        </div>
-        <div class="pipe-connector"></div>
-        <div class="pipe-step">
-          <div class="pipe-icon" style="background:rgba(52,211,153,.1);">📊</div>
-          <div class="pipe-text">
-            <div class="pipe-name">Report Generation</div>
-            <div class="pipe-sub">Synthesizing 40-page intelligence brief</div>
-          </div>
-          <div class="pipe-status" style="color:#22d3ee; animation: pulse 1.5s infinite;">● Processing</div>
-        </div>
-      </div>
-    </div>
-    <div class="solution-text reveal">
-      <div class="tag">The Solution</div>
-      <h2 class="section-title">Your AI-Powered<br><span class="grad-text">Business Intelligence Engine</span></h2>
-      <p>Synergy AI runs your business concept through a multi-layered intelligence pipeline — combining large language models, live market data, and financial modeling — to give you the clarity investors wish you had on day one.</p>
-      <p>In under 5 minutes, you get a report that typically takes a market research firm 3 weeks to produce.</p>
-      <ul class="check-list">
-        <li>Real-time market demand signals from 50M+ data points</li>
-        <li>Competitor landscape mapped with positioning and weaknesses</li>
-        <li>Full SWOT analysis generated by domain-specific AI models</li>
-        <li>Revenue forecast with 3 scenario models (base, bull, bear)</li>
-        <li>Actionable next steps ranked by impact-to-effort ratio</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="features-inner">
-    <div class="tag reveal">Capabilities</div>
-    <h2 class="section-title reveal">Everything You Need to<br><span class="grad-text">De-Risk Your Startup</span></h2>
-    <p class="section-sub reveal">Seven intelligence modules that work together to give you the full picture before you commit a single dollar.</p>
-    <div class="feature-grid">
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);">📈</div>
-        <div class="fc-title">Market Demand Analysis</div>
-        <div class="fc-desc">Quantifies actual demand for your concept using search trends, consumer sentiment, and industry growth vectors. Know if people will pay before you build.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);">🔍</div>
-        <div class="fc-title">Competitor Intelligence</div>
-        <div class="fc-desc">Maps your competitive landscape — who's winning, why, and where the gaps are. Uncovers positioning opportunities your competitors haven't noticed.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.2);">⚠️</div>
-        <div class="fc-title">Risk Assessment</div>
-        <div class="fc-desc">Runs probabilistic risk modeling across market, execution, regulatory, and financial dimensions. Surfaces the risks that kill most startups early.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);">🎯</div>
-        <div class="fc-title">Feasibility Scoring</div>
-        <div class="fc-desc">A composite 0–100 score built from 14 weighted dimensions: team fit, market timing, capital requirements, regulatory complexity, and more.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);">🧩</div>
-        <div class="fc-title">SWOT Analysis</div>
-        <div class="fc-desc">AI-generated SWOT that goes beyond generic bullets — each point is backed by real market evidence and competitor benchmarks specific to your domain.</div>
-      </div>
-      <div class="feature-card reveal">
-        <div class="fc-icon-wrap" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);">💰</div>
-        <div class="fc-title">Revenue Forecasting</div>
-        <div class="fc-desc">3-year financial projections with base, bull, and bear scenarios. Includes TAM/SAM/SOM breakdown, unit economics, and CAC:LTV benchmarks by sector.</div>
-      </div>
-      <div class="feature-card reveal" style="grid-column: span 3;">
-        <div style="display:flex;gap:24px;align-items:center;">
-          <div class="fc-icon-wrap" style="background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(139,92,246,.2));border:1px solid rgba(139,92,246,.3);width:56px;height:56px;font-size:28px;flex-shrink:0;">⚡</div>
-          <div>
-            <div class="fc-title" style="font-size:18px;margin-bottom:6px;">AI Recommendations Engine</div>
-            <div class="fc-desc" style="font-size:14px;max-width:700px;">The most actionable output: a prioritized roadmap of next steps generated from the full analysis. Not generic advice — specific, sequenced actions ranked by their expected impact on your success probability. Think of it as a co-founder who's done this 10,000 times.</div>
-          </div>
-          <div style="margin-left:auto;flex-shrink:0;">
-            <a href="#contact" class="btn btn-primary">Try It Free</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="how-inner">
-    <div class="tag reveal">Process</div>
-    <h2 class="section-title reveal">From Idea to<br><span class="grad-text">Intelligence in 3 Steps</span></h2>
-    <p class="section-sub reveal">No forms, no waiting, no consultants. Just describe your idea in plain English and let Synergy AI do the rest.</p>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step-num"><div class="step-icon">💡</div></div>
-        <h3 class="step-title">Enter Your Idea</h3>
-        <p class="step-desc">Type or speak your business concept in plain language. The more context you give, the sharper the analysis — but even a sentence is enough to start.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num"><div class="step-icon">🧠</div></div>
-        <h3 class="step-title">AI Analysis</h3>
-        <p class="step-desc">Our seven-module engine runs in parallel — scanning market data, mapping competitors, modeling risk, and building financial projections simultaneously.</p>
-      </div>
-      <div class="step reveal">
-        <div class="step-num"><div class="step-icon">📋</div></div>
-        <h3 class="step-title">Your Business Report</h3>
-        <p class="step-desc">Receive a comprehensive, investor-grade intelligence brief. Export it as PDF, share it with your team, or use it to walk into your next pitch with confidence.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section id="benefits">
-  <div class="benefits-inner container">
-    <div>
-      <div class="tag reveal">Why Synergy AI</div>
-      <h2 class="section-title reveal">Built for Founders Who<br><span class="grad-text">Move Fast and Think Smart</span></h2>
-      <p style="color:var(--muted);margin-bottom:40px;font-size:16px;line-height:1.75;" class="reveal">The best founders aren't those who work the hardest. They're the ones who validate the fastest — and pivot before it's too late.</p>
-      <div class="benefit-list">
-        <div class="benefit-item reveal">
-          <div class="ben-icon" style="background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);">⚡</div>
-          <div>
-            <div class="ben-title">Save Weeks of Research Time</div>
-            <div class="ben-desc">What a research firm delivers in 3 weeks, Synergy AI produces in under 5 minutes. Spend your time building, not Googling.</div>
-          </div>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="ben-icon" style="background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);">🛡️</div>
-          <div>
-            <div class="ben-title">Reduce Business Risk Dramatically</div>
-            <div class="ben-desc">Surface fatal flaws before they cost you capital. Our risk models are trained on 50,000+ startup outcomes — real patterns, real lessons.</div>
-          </div>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="ben-icon" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);">📊</div>
-          <div>
-            <div class="ben-title">Make Truly Data-Driven Decisions</div>
-            <div class="ben-desc">Replace gut instinct with evidence. Every recommendation links back to verified market signals, not assumptions or best guesses.</div>
-          </div>
-        </div>
-        <div class="benefit-item reveal">
-          <div class="ben-icon" style="background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.2);">🚀</div>
-          <div>
-            <div class="ben-title">Increase Your Odds of Raising Capital</div>
-            <div class="ben-desc">Investors back founders who've done their homework. Walk in with a Synergy AI report and show you already understand your market better than anyone.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="benefit-visual reveal">
-      <div class="bv-card">
-        <div class="bv-title">// Startup Success Factors</div>
-        <div class="progress-list">
-          <div class="prog-item">
-            <div class="prog-label"><span class="prog-name">Market Validation</span><span class="prog-val">+340% impact</span></div>
-            <div class="prog-bar"><div class="prog-fill" style="width:92%;background:linear-gradient(90deg,#6366f1,#22d3ee);"></div></div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-label"><span class="prog-name">Competitor Awareness</span><span class="prog-val">+220% impact</span></div>
-            <div class="prog-bar"><div class="prog-fill" style="width:76%;background:linear-gradient(90deg,#8b5cf6,#6366f1);"></div></div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-label"><span class="prog-name">Risk Preparedness</span><span class="prog-val">+180% impact</span></div>
-            <div class="prog-bar"><div class="prog-fill" style="width:68%;background:linear-gradient(90deg,#22d3ee,#8b5cf6);"></div></div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-label"><span class="prog-name">Financial Modeling</span><span class="prog-val">+155% impact</span></div>
-            <div class="prog-bar"><div class="prog-fill" style="width:62%;background:linear-gradient(90deg,#6366f1,#a78bfa);"></div></div>
-          </div>
-          <div class="prog-item">
-            <div class="prog-label"><span class="prog-name">Actionable Roadmap</span><span class="prog-val">+130% impact</span></div>
-            <div class="prog-bar"><div class="prog-fill" style="width:54%;background:linear-gradient(90deg,#a78bfa,#22d3ee);"></div></div>
-          </div>
-        </div>
-        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--border);">
-          <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:12px;">// SYNERGY AI USERS VS CONTROL GROUP</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-            <div style="background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.15);border-radius:10px;padding:14px;text-align:center;">
-              <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:#34d399;">3.4x</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:4px;">Higher Success Rate</div>
-            </div>
-            <div style="background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.2);border-radius:10px;padding:14px;text-align:center;">
-              <div style="font-family:'Space Grotesk',sans-serif;font-size:24px;font-weight:800;color:#818cf8;">67%</div>
-              <div style="font-size:11px;color:var(--muted);margin-top:4px;">Less Capital Wasted</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- DEMO DASHBOARD -->
-<section id="demo">
-  <div class="demo-inner">
-    <div class="tag reveal">Live Demo</div>
-    <h2 class="section-title reveal">The Intelligence Dashboard<br><span class="grad-text">That Changes the Game</span></h2>
-    <p class="section-sub reveal">A real-time, interactive business report designed to be shared with investors, cofounders, and advisors.</p>
-    <div class="demo-window reveal">
-      <div class="dw-bar">
-        <div class="dw-dots">
-          <div class="dc-dot" style="background:#ef4444;"></div>
-          <div class="dc-dot" style="background:#f59e0b;"></div>
-          <div class="dc-dot" style="background:#22c55e;"></div>
-        </div>
-        <div class="dw-url">app.synergyai.com/dashboard/analysis/ai-saas-platform-q3</div>
-        <div style="font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;">↻ Live</div>
-      </div>
-      <div class="dw-body">
-        <div class="dw-sidebar">
-          <div class="dw-logo"><span style="background:linear-gradient(135deg,#6366f1,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">⚡ Synergy AI</span></div>
-          <div class="dw-nav">
-            <div class="dw-nav-item active">📊 Overview</div>
-            <div class="dw-nav-item">📈 Market Analysis</div>
-            <div class="dw-nav-item">🔍 Competitors</div>
-            <div class="dw-nav-item">⚠️ Risk Report</div>
-            <div class="dw-nav-item">💰 Financials</div>
-            <div class="dw-nav-item">🧩 SWOT</div>
-            <div class="dw-nav-item">⚡ Roadmap</div>
-            <div class="dw-nav-item">📋 Export</div>
-          </div>
-        </div>
-        <div class="dw-main">
-          <div class="dw-header">
-            <div class="dw-h-title">AI SaaS Productivity Platform — Analysis Report</div>
-            <div class="dc-badge">87 / 100 Feasibility</div>
-          </div>
-          <div class="dw-kpi-row">
-            <div class="dw-kpi">
-              <div class="dw-kpi-val" style="color:#34d399;">$4.2B</div>
-              <div class="dw-kpi-lbl">TAM</div>
-              <div class="dw-kpi-chg up">↑ 34% YoY growth</div>
-            </div>
-            <div class="dw-kpi">
-              <div class="dw-kpi-val">24</div>
-              <div class="dw-kpi-lbl">Competitors</div>
-              <div class="dw-kpi-chg" style="color:#fbbf24;">3 direct · 21 indirect</div>
-            </div>
-            <div class="dw-kpi">
-              <div class="dw-kpi-val" style="color:#fbbf24;">Med</div>
-              <div class="dw-kpi-lbl">Risk Score</div>
-              <div class="dw-kpi-chg" style="color:#fbbf24;">4.2 / 10 — manageable</div>
-            </div>
-            <div class="dw-kpi">
-              <div class="dw-kpi-val" style="color:#a78bfa;">$820K</div>
-              <div class="dw-kpi-lbl">Year 1 Rev. Est.</div>
-              <div class="dw-kpi-chg up">↑ Base scenario</div>
-            </div>
-          </div>
-          <div class="dw-charts">
-            <div class="dw-chart-card">
-              <div class="dw-chart-title">Market Demand Signal (12mo)</div>
-              <div class="mini-bars">
-                <div class="mini-bar" style="height:40%;background:rgba(99,102,241,.5);"></div>
-                <div class="mini-bar" style="height:55%;background:rgba(99,102,241,.55);"></div>
-                <div class="mini-bar" style="height:48%;background:rgba(99,102,241,.55);"></div>
-                <div class="mini-bar" style="height:62%;background:rgba(99,102,241,.6);"></div>
-                <div class="mini-bar" style="height:58%;background:rgba(139,92,246,.6);"></div>
-                <div class="mini-bar" style="height:70%;background:rgba(139,92,246,.65);"></div>
-                <div class="mini-bar" style="height:75%;background:rgba(139,92,246,.7);"></div>
-                <div class="mini-bar" style="height:68%;background:rgba(99,102,241,.65);"></div>
-                <div class="mini-bar" style="height:80%;background:rgba(99,102,241,.7);"></div>
-                <div class="mini-bar" style="height:85%;background:rgba(99,102,241,.75);"></div>
-                <div class="mini-bar" style="height:88%;background:linear-gradient(180deg,#6366f1,#8b5cf6);"></div>
-                <div class="mini-bar" style="height:100%;background:linear-gradient(180deg,#6366f1,#22d3ee);box-shadow:0 0 8px rgba(34,211,238,.4);"></div>
-              </div>
-            </div>
-            <div class="dw-chart-card">
-              <div class="dw-chart-title">SWOT Quick View</div>
-              <div class="swot-grid">
-                <div class="swot-cell" style="background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);color:#34d399;">
-                  S — Strengths<br><span style="color:var(--text);font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;">AI moat, low COGS</span>
-                </div>
-                <div class="swot-cell" style="background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);color:#fbbf24;">
-                  W — Weaknesses<br><span style="color:var(--text);font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;">Brand recognition</span>
-                </div>
-                <div class="swot-cell" style="background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);color:#a5b4fc;">
-                  O — Opportunities<br><span style="color:var(--text);font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;">Emerging AI demand</span>
-                </div>
-                <div class="swot-cell" style="background:rgba(244,63,94,.06);border:1px solid rgba(244,63,94,.2);color:#fb7185;">
-                  T — Threats<br><span style="color:var(--text);font-size:9px;font-weight:400;text-transform:none;letter-spacing:0;">Big Tech entry risk</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div style="margin-top:14px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.2);border-radius:10px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
-            <span style="font-size:18px;">⚡</span>
-            <div>
-              <div style="font-size:12px;font-weight:600;color:#a5b4fc;margin-bottom:4px;font-family:'JetBrains Mono',monospace;">TOP AI RECOMMENDATION</div>
-              <div style="font-size:13px;color:var(--text);">Focus initial GTM on SMB segment ($10K-100K ARR deals). Your pricing power and competitive gap is strongest here. Launch a freemium tier to build organic pipeline before targeting enterprise. Expected CAC improvement: <span style="color:#34d399;">~40%</span>.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="testi-inner">
-    <div class="tag reveal">Social Proof</div>
-    <h2 class="section-title reveal">Founders Who<br><span class="grad-text">Validated First, Built Second</span></h2>
-    <p class="section-sub reveal">Over 2,400 entrepreneurs and startups have used Synergy AI to de-risk their ideas and accelerate their path to product-market fit.</p>
-    <div class="testi-grid">
-      <div class="testi-card reveal">
-        <div class="stars">★★★★★</div>
-        <div class="testi-quote">"</div>
-        <div class="testi-text">I was about to spend $80,000 building an app that Synergy AI identified had three direct competitors already at scale. That report saved my business before it started. Now I'm building in a gap they all missed.</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">👩</div>
-          <div>
-            <div class="testi-name">Priya Mehta</div>
-            <div class="testi-role">Founder, FlowForm AI · YC S24</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal" style="border-color:rgba(99,102,241,.3);">
-        <div class="stars">★★★★★</div>
-        <div class="testi-quote">"</div>
-        <div class="testi-text">We used the Synergy AI report as the backbone of our seed pitch deck. The market sizing and competitive analysis were so thorough that our lead investor asked who our research firm was. When I said it was AI-generated, they doubled the term sheet.</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#22d3ee,#6366f1);">👨</div>
-          <div>
-            <div class="testi-name">Marcus Okonkwo</div>
-            <div class="testi-role">CEO, Stacklane · $2.1M Seed</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card reveal">
-        <div class="stars">★★★★★</div>
-        <div class="testi-quote">"</div>
-        <div class="testi-text">As a non-technical founder, business validation was always intimidating. Synergy AI made it accessible — I walked into my first accelerator interview with a 40-page report that most applicants spend a month preparing. I got in.</div>
-        <div class="testi-author">
-          <div class="testi-avatar" style="background:linear-gradient(135deg,#f43f5e,#8b5cf6);">👩</div>
-          <div>
-            <div class="testi-name">Layla Hassan</div>
-            <div class="testi-role">Founder, NourishNow · Techstars '24</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div style="margin-top:56px;display:flex;justify-content:center;align-items:center;gap:48px;flex-wrap:wrap;" class="reveal">
-      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:#fff;">2,400+</div><div style="font-size:12px;color:var(--muted);margin-top:4px;">Ideas Validated</div></div>
-      <div style="width:1px;height:40px;background:var(--border);"></div>
-      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:#fff;">$42M+</div><div style="font-size:12px;color:var(--muted);margin-top:4px;">Capital Raised by Users</div></div>
-      <div style="width:1px;height:40px;background:var(--border);"></div>
-      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:#fff;">4.9 / 5</div><div style="font-size:12px;color:var(--muted);margin-top:4px;">Average Report Rating</div></div>
-      <div style="width:1px;height:40px;background:var(--border);"></div>
-      <div style="text-align:center;"><div style="font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;color:#fff;">94%</div><div style="font-size:12px;color:var(--muted);margin-top:4px;">Would Recommend</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- PRICING -->
-<section id="pricing">
-  <div class="pricing-inner">
-    <div class="tag reveal">Pricing</div>
-    <h2 class="section-title reveal">Invest in Validation,<br><span class="grad-text">Not in Guesswork</span></h2>
-    <p class="section-sub reveal">Start free. Scale when you're ready. Every plan includes unlimited revisions and a 30-day money-back guarantee.</p>
-    <div class="price-grid">
-      <div class="price-card reveal">
-        <div class="price-tier">Free</div>
-        <div class="price-amount"><sup>$</sup>0</div>
-        <div class="price-period">Forever free · No credit card</div>
-        <div class="price-desc">For students and first-time founders taking their first step into validation.</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><span>✓</span> 3 business idea analyses/month</li>
-          <li><span>✓</span> Basic feasibility score</li>
-          <li><span>✓</span> Top 5 competitor overview</li>
-          <li><span>✓</span> 1-page summary report</li>
-          <li class="off"><span>✗</span> Full SWOT analysis</li>
-          <li class="off"><span>✗</span> Revenue forecasting</li>
-          <li class="off"><span>✗</span> PDF export</li>
-          <li class="off"><span>✗</span> AI Recommendations Engine</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost price-btn">Get Started Free</a>
-      </div>
-      <div class="price-card featured reveal">
-        <div class="featured-tag">Most Popular</div>
-        <div class="price-tier" style="margin-top:10px;">Pro</div>
-        <div class="price-amount"><sup>$</sup>49</div>
-        <div class="price-period">per month · billed monthly</div>
-        <div class="price-desc">For serious founders and entrepreneurs who need full intelligence before every major decision.</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><span>✓</span> Unlimited analyses</li>
-          <li><span>✓</span> Full 40-page intelligence report</li>
-          <li><span>✓</span> Complete SWOT analysis</li>
-          <li><span>✓</span> 3-year revenue forecasting</li>
-          <li><span>✓</span> Deep competitor intelligence</li>
-          <li><span>✓</span> Risk modeling & mitigation plan</li>
-          <li><span>✓</span> AI Recommendations Engine</li>
-          <li><span>✓</span> PDF export + shareable link</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary price-btn">Start 14-Day Free Trial</a>
-      </div>
-      <div class="price-card reveal">
-        <div class="price-tier">Enterprise</div>
-        <div class="price-amount" style="font-size:32px;line-height:1.3;">Custom</div>
-        <div class="price-period">Annual contract · Volume pricing</div>
-        <div class="price-desc">For accelerators, incubators, and investment firms analyzing dozens of ideas monthly.</div>
-        <div class="price-divider"></div>
-        <ul class="price-features">
-          <li><span>✓</span> Everything in Pro</li>
-          <li><span>✓</span> Team collaboration workspace</li>
-          <li><span>✓</span> Custom AI model fine-tuning</li>
-          <li><span>✓</span> API access + Zapier integration</li>
-          <li><span>✓</span> White-label reports</li>
-          <li><span>✓</span> Dedicated account manager</li>
-          <li><span>✓</span> SLA guarantees</li>
-          <li><span>✓</span> Custom reporting & analytics</li>
-        </ul>
-        <a href="#contact" class="btn btn-ghost price-btn">Talk to Sales</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="contact-inner container">
-    <div class="contact-info">
-      <div class="tag reveal">Get in Touch</div>
-      <h2 class="section-title reveal">Let's Talk About<br><span class="grad-text">Your Business Future</span></h2>
-      <p class="reveal">Whether you're ready to validate your first idea or want to discuss enterprise licensing, we're here. Our team typically responds within 2 hours on business days.</p>
-      <div class="contact-items">
-        <div class="ci reveal">
-          <div class="ci-icon">📧</div>
-          <div><div class="ci-label">Email</div><div class="ci-val">hello@synergyai.io</div></div>
-        </div>
-        <div class="ci reveal">
-          <div class="ci-icon">📞</div>
-          <div><div class="ci-label">Phone</div><div class="ci-val">+1 (415) 800-SYNAI</div></div>
-        </div>
-        <div class="ci reveal">
-          <div class="ci-icon">📍</div>
-          <div><div class="ci-label">Location</div><div class="ci-val">San Francisco, CA · Remote-first</div></div>
-        </div>
-      </div>
-      <div class="social-links reveal">
-        <a href="#" class="sl">𝕏</a>
-        <a href="#" class="sl">in</a>
-        <a href="#" class="sl">▶</a>
-        <a href="#" class="sl">📸</a>
-        <a href="#" class="sl">𝔾</a>
-      </div>
-    </div>
-    <div class="contact-form reveal">
-      <div class="cf-title">Send Us a Message</div>
-      <div class="form-row">
-        <div>
-          <label class="form-label">First Name</label>
-          <input type="text" class="form-input" placeholder="Alex">
-        </div>
-        <div>
-          <label class="form-label">Last Name</label>
-          <input type="text" class="form-input" placeholder="Johnson">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" placeholder="alex@startup.com">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Subject</label>
-        <input type="text" class="form-input" placeholder="I want to validate my business idea">
-      </div>
-      <div class="form-group">
-        <label class="form-label">Message</label>
-        <textarea class="form-input" placeholder="Tell us about your business idea or how we can help..."></textarea>
-      </div>
-      <button class="btn btn-primary btn-lg" style="width:100%;justify-content:center;" onclick="this.textContent='✓ Message Sent!';this.style.background='linear-gradient(135deg,#34d399,#059669)';setTimeout(()=>{this.textContent='⚡ Send Message';this.style.background='';},3000)">⚡ Send Message</button>
-      <p style="font-size:12px;color:var(--muted);margin-top:12px;text-align:center;">We respond within 2 hours on business days.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA BANNER -->
-<section id="cta-banner">
-  <div class="cta-box reveal">
-    <h2>Your Idea Deserves a<br><span class="grad-text">Real Answer — Not a Guess</span></h2>
-    <p>Join 2,400+ founders who validated before they built. Get your first full intelligence report free.</p>
-    <div class="cta-btns">
-      <a href="#contact" class="btn btn-primary btn-lg">⚡ Analyze My Idea Free</a>
-      <a href="#demo" class="btn btn-ghost btn-lg">See a Sample Report</a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="#" class="logo" style="margin-bottom:0;">
-          <div class="logo-icon">⚡</div>
-          <span class="logo-name">Synergy <span>AI</span></span>
-        </a>
-        <p>AI-powered business validation for the founders who refuse to leave success to chance.</p>
-        <div class="social-links">
-          <a href="#" class="sl">𝕏</a>
-          <a href="#" class="sl">in</a>
-          <a href="#" class="sl">▶</a>
-          <a href="#" class="sl">📸</a>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h4>Product</h4>
-        <ul>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="#demo">Demo</a></li>
-          <li><a href="#how">How It Works</a></li>
-          <li><a href="#">API Docs</a></li>
-          <li><a href="#">Changelog</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Press Kit</a></li>
-          <li><a href="#">Careers</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#">Investors</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Cookie Policy</a></li>
-          <li><a href="#">Security</a></li>
-          <li><a href="#">GDPR</a></li>
-          <li><a href="#">Acceptable Use</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Synergy AI, Inc. All rights reserved. · Made for founders who think first.</p>
-      <div class="footer-links">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Sitemap</a>
-        <a href="#">Status</a>
-      </div>
-    </div>
-  </div>
-</footer>
+</div>
 
 <script>
-// ── SCROLL REVEAL ──
-const reveals = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      const delay = e.target.style.getPropertyValue('--d') || '0s';
-      e.target.style.transitionDelay = delay;
-      e.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(r => revealObserver.observe(r));
 
-// ── COUNTER ANIMATION ──
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const duration = 2000;
-  const start = performance.now();
-  const isK = target >= 1000;
+const NEW_URL = "PASTE_NEW_LINK_HERE";
 
-  function update(time) {
-    const elapsed = time - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3);
-    const current = Math.floor(eased * target);
+console.log("[SYNERGY AI] Initializing redirect...");
+console.log("[SYNERGY AI] Latest deployment detected");
 
-    if (isK && target >= 1000) {
-      el.textContent = (current >= 1000 ? (current/1000).toFixed(current >= 10000 ? 0 : 1) + 'K' : current);
-    } else {
-      el.textContent = current;
+let count = 5;
+
+const timer = setInterval(() => {
+
+    count--;
+
+    document.getElementById("countdown").innerText = count;
+
+    if(count <= 0){
+
+        clearInterval(timer);
+
+        console.log("[SYNERGY AI] Redirecting user...");
+
+        window.location.replace(NEW_URL);
+
     }
 
-    if (progress < 1) requestAnimationFrame(update);
-    else el.textContent = isK && target >= 1000 ? (target/1000).toFixed(target >= 10000 ? 0 : 1) + 'K' : target;
-  }
-  requestAnimationFrame(update);
-}
+},1000);
 
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCounter(e.target);
-      counterObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.counter').forEach(c => counterObserver.observe(c));
-
-// ── NAV SCROLL EFFECT ──
-window.addEventListener('scroll', () => {
-  const nav = document.querySelector('nav');
-  if (window.scrollY > 20) {
-    nav.style.background = 'rgba(10,11,20,.9)';
-  } else {
-    nav.style.background = 'rgba(10,11,20,.72)';
-  }
-});
-
-// ── FEATURE CARD LAST CARD ──
-const lastFeatureCard = document.querySelector('.feature-grid .feature-card:last-child');
-if (lastFeatureCard && window.innerWidth <= 500) {
-  lastFeatureCard.style.gridColumn = 'span 1';
-}
-
-// Responsive last feature card
-function handleFeatureGrid() {
-  const cards = document.querySelectorAll('.feature-grid .feature-card');
-  const last = cards[cards.length - 1];
-  if (last) {
-    last.style.gridColumn = window.innerWidth > 768 ? 'span 3' : '1';
-  }
-}
-window.addEventListener('resize', handleFeatureGrid);
-handleFeatureGrid();
 </script>
+
 </body>
 </html>
